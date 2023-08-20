@@ -4,59 +4,39 @@ while (!(input.buttonIsPressed(Button.A))) {
 	
 }
 music.startMelody(music.builtInMelody(Melodies.PowerUp), MelodyOptions.Once)
-// }
+let ChgTune = 0
+loops.everyInterval(15000, function () {
+    if (ChgTune == 0) {
+        ChgTune = 1
+        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Birthday), music.PlaybackMode.InBackground)
+    } else {
+        ChgTune = 0
+        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Wedding), music.PlaybackMode.InBackground)
+    }
+})
 basic.forever(function () {
-    // if (zoombit.readUltrasonic() < 30) {
-    // zoombit.brake()
-    // } else if (zoombit.readUltrasonic() < 20) {
     if (zoombit.readUltrasonic() < 20) {
-        if (zoombit.isLineDetectedOn(LinePosition.Center)) {
-            zoombit.move(MotorDirection.Backward, 128)
-        } else if (zoombit.isLineDetectedOn(LinePosition.Left1)) {
-            zoombit.setMotorsSpeed(100, 50)
-            position = 1
-        } else if (zoombit.isLineDetectedOn(LinePosition.Right1)) {
-            zoombit.setMotorsSpeed(50, 100)
-            position = 2
-        } else if (zoombit.isLineDetectedOn(LinePosition.Left2)) {
-            zoombit.setMotorsSpeed(100, 0)
-            position = 1
-        } else if (zoombit.isLineDetectedOn(LinePosition.Right2)) {
-            zoombit.setMotorsSpeed(0, 100)
-            position = 2
-        } else if (zoombit.isLineDetectedOn(LinePosition.None)) {
-            if (position == 1) {
-                zoombit.turn(TurnDirection.Right, 80)
-            } else if (position == 2) {
-                zoombit.turn(TurnDirection.Left, 80)
-            }
-        }
+        zoombit.move(MotorDirection.Backward, 100)
     } else {
         if (zoombit.isLineDetectedOn(LinePosition.Center)) {
-            basic.showIcon(IconNames.Yes)
-            zoombit.move(MotorDirection.Forward, 128)
+            zoombit.move(MotorDirection.Forward, 80)
         } else if (zoombit.isLineDetectedOn(LinePosition.Left1)) {
-            basic.showIcon(IconNames.No)
-            zoombit.setMotorsSpeed(50, 100)
+            zoombit.setMotorsSpeed(40, 80)
             position = 1
         } else if (zoombit.isLineDetectedOn(LinePosition.Right1)) {
-            basic.showIcon(IconNames.Asleep)
-            zoombit.setMotorsSpeed(100, 50)
+            zoombit.setMotorsSpeed(80, 40)
             position = 2
         } else if (zoombit.isLineDetectedOn(LinePosition.Left2)) {
-            basic.showIcon(IconNames.Happy)
-            zoombit.setMotorsSpeed(0, 100)
+            zoombit.setMotorsSpeed(0, 80)
             position = 1
         } else if (zoombit.isLineDetectedOn(LinePosition.Right2)) {
-            basic.showIcon(IconNames.StickFigure)
-            zoombit.setMotorsSpeed(100, 0)
+            zoombit.setMotorsSpeed(80, 0)
             position = 2
         } else if (zoombit.isLineDetectedOn(LinePosition.None)) {
-            basic.showIcon(IconNames.Tortoise)
             if (position == 1) {
-                zoombit.turn(TurnDirection.Left, 40)
+                zoombit.turn(TurnDirection.Left, 80)
             } else if (position == 2) {
-                zoombit.turn(TurnDirection.Right, 40)
+                zoombit.turn(TurnDirection.Right, 80)
             }
         }
     }
